@@ -121,7 +121,16 @@ public class ControlJuego {
      * @pre : El tablero tiene que estar ya inicializado, por lo tanto no hace falta calcularlo, símplemente consultarlo
      */
     public int getMinasAlrededor(int i, int j) {
-
+      int countMinas=0;
+        //Se hace el recuento de las minas que hay alrededor del boton pulsado
+        for (int k = i-1; k < i+1; k++) {
+            for (int l = j-1; l < j+1; l++) {
+                if(tablero[k][l]==MINA){
+                    countMinas++;
+                }
+            }
+        }
+        return countMinas;
     }
 
     /**
