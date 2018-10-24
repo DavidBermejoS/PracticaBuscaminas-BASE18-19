@@ -99,7 +99,11 @@ public class ControlJuego {
      * @pre : La casilla nunca debe haber sido abierta antes, no es controlado por el ControlJuego. Por lo tanto siempre sumaremos puntos
      */
     public boolean abrirCasilla(int i, int j) {
-
+        if(tablero[i][j]==MINA){
+            return false;
+        }
+        puntuacion+=1;
+        return true;
     }
 
 
@@ -109,7 +113,10 @@ public class ControlJuego {
      * @return Devuelve verdadero si se han abierto todas las celdas que no son minas.
      **/
     public boolean esFinJuego() {
-
+        if(puntuacion==LADO_TABLERO*LADO_TABLERO-MINAS_INICIALES){
+            return true;
+        }
+        return false;
     }
 
 
@@ -136,7 +143,21 @@ public class ControlJuego {
      * @pre : El tablero tiene que estar ya inicializado, por lo tanto no hace falta calcularlo, símplemente consultarlo
      */
     public int getMinasAlrededor(int i, int j) {
+        int countMinas=0;
+        //Se hace el recuento de las minas que hay alrededor del boton pulsado
+        for (int k = i-1; k < i+2; k++) {
+            for (int l = j-1; l < j+2; l++) {
+                //colocamos un try/catch para controlar la excepcion de los bordes del tablero
+                try {
+                    if (tablero[k][l] == MINA) {
+                        countMinas++;
+                    }
+                }catch (Exception e){
 
+                }
+            }
+        }
+        return countMinas;
     }
 
     /**
@@ -145,6 +166,7 @@ public class ControlJuego {
      * @return Un entero con la puntuación actual
      */
     public int getPuntuacion() {
+        return puntuacion;
 
     }
 
