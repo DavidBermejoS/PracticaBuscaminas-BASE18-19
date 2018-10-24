@@ -123,10 +123,15 @@ public class ControlJuego {
     public int getMinasAlrededor(int i, int j) {
       int countMinas=0;
         //Se hace el recuento de las minas que hay alrededor del boton pulsado
-        for (int k = i-1; k < i+1; k++) {
-            for (int l = j-1; l < j+1; l++) {
-                if(tablero[k][l]==MINA){
-                    countMinas++;
+        for (int k = i-1; k < i+2; k++) {
+            for (int l = j-1; l < j+2; l++) {
+                //colocamos un try/catch para controlar la excepcion de los bordes del tablero
+                try {
+                    if (tablero[k][l] == MINA) {
+                        countMinas++;
+                    }
+                }catch (Exception e){
+
                 }
             }
         }
