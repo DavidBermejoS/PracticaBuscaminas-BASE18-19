@@ -73,7 +73,21 @@ public class ControlJuego {
      * @return : El número de minas que hay alrededor de la casilla [i][j]
      **/
     private int calculoMinasAdjuntas(int i, int j) {
+        int countMinas=0;
+        //Se hace el recuento de las minas que hay alrededor del boton pulsado
+        for (int k = i-1; k < i+2; k++) {
+            for (int l = j-1; l < j+2; l++) {
+                //colocamos un try/catch para controlar la excepcion de los bordes del tablero
+                try {
+                    if (tablero[k][l] == MINA) {
+                        countMinas++;
+                    }
+                }catch (Exception e){
 
+                }
+            }
+        }
+        return countMinas;
     }
 
     /**
@@ -95,6 +109,7 @@ public class ControlJuego {
      * @return Devuelve verdadero si se han abierto todas las celdas que no son minas.
      **/
     public boolean esFinJuego() {
+
     }
 
 
@@ -121,21 +136,7 @@ public class ControlJuego {
      * @pre : El tablero tiene que estar ya inicializado, por lo tanto no hace falta calcularlo, símplemente consultarlo
      */
     public int getMinasAlrededor(int i, int j) {
-      int countMinas=0;
-        //Se hace el recuento de las minas que hay alrededor del boton pulsado
-        for (int k = i-1; k < i+2; k++) {
-            for (int l = j-1; l < j+2; l++) {
-                //colocamos un try/catch para controlar la excepcion de los bordes del tablero
-                try {
-                    if (tablero[k][l] == MINA) {
-                        countMinas++;
-                    }
-                }catch (Exception e){
 
-                }
-            }
-        }
-        return countMinas;
     }
 
     /**
