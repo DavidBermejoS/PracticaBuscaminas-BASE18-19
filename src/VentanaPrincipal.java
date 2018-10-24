@@ -156,7 +156,12 @@ public class VentanaPrincipal {
 	 * @param j: posición horizontal de la celda.
 	 */
 	public void mostrarNumMinasAlrededor(int i , int j) {
-		//TODO
+		//variable minas alrededor para guardar el numero de minas
+		int minasAlrededor = juego.getMinasAlrededor(i,j);
+		botonesJuego[i][j].setVisible(false);
+		JTextField text = new JTextField(String.valueOf(minasAlrededor));
+		text.setForeground(correspondenciaColores[minasAlrededor]);
+		panelesJuego[i][j].add(text);
 	}
 	
 	
