@@ -36,7 +36,7 @@ public class ActionBoton implements ActionListener{
 		String botonText=botonAux.getText();
 		if (botonText.equalsIgnoreCase("Go!")) {
 			monitor.inicializarPartida();
-			ventana.inicializar();
+			ventana.inicializarComponentes();
 			ventana.refrescarPantalla();
 		} else {
 			if (monitor.abrirCasilla(col, row)) {
