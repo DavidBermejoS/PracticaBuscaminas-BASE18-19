@@ -171,7 +171,22 @@ public class VentanaPrincipal {
 	 * @post : Todos los botones se desactivan excepto el de volver a iniciar el juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
-		//TODO
+		if(porExplosion){
+			JOptionPane.showMessageDialog(ventana,"Has pisado una mina"+"\n Has obtenido un total de: "+juego.getPuntuacion(),"¡Has perdido!",JOptionPane.INFORMATION_MESSAGE);
+			for (int i = 0; i < botonesJuego.length; i++) {
+				for (int j = 0; j < botonesJuego[i].length; j++) {
+					botonesJuego[i][j].enable(false);
+				}
+			}
+		}else{
+			JOptionPane.showMessageDialog(ventana,"Has pisado una mina"+"\n Has obtenido un total de: "+juego.getPuntuacion(),"¡Has Ganado!",JOptionPane.INFORMATION_MESSAGE);
+			for (int i = 0; i < botonesJuego.length; i++) {
+				for (int j = 0; j < botonesJuego[i].length; j++) {
+					botonesJuego[i][j].enable(false);
+				}
+			}
+		}
+
 	}
 
 	/**
