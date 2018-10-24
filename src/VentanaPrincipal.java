@@ -220,6 +220,14 @@ public class VentanaPrincipal {
 	}
 
 	/**
+	 * Metodo encargado de devolver la ventana
+	 * @return Jframe ventana
+	 */
+	public JFrame getVentana(){
+		return this.ventana;
+	}
+
+	/**
 	 * Método para inicializar el programa
 	 */
 	public void inicializar(){
