@@ -165,9 +165,10 @@ public class VentanaPrincipal {
 		//variable minas alrededor para guardar el numero de minas
 		int minasAlrededor = juego.getMinasAlrededor(i,j);
 		botonesJuego[i][j].setVisible(false);
-		JTextField text = new JTextField(String.valueOf(minasAlrededor));
-		text.setForeground(correspondenciaColores[minasAlrededor]);
-		panelesJuego[i][j].add(text);
+		JLabel label = new JLabel(String.valueOf(minasAlrededor));
+		label.setHorizontalAlignment(SwingConstants.HORIZONTAL);
+		label.setForeground(correspondenciaColores[minasAlrededor]);
+		panelesJuego[i][j].add(label);
 	}
 	
 	
