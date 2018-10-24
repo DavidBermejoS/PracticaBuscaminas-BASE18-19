@@ -38,6 +38,13 @@ public class ControlJuego {
     public void inicializarPartida() {
         //TODO: Repartir minas e inicializar puntacion. Si hubiese un tablero anterior, lo pongo todo a cero para inicializarlo.
 
+        //ponemos todo el tablero a 0
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero[i].length; j++) {
+                tablero[i][j]=0;
+            }
+        }
+
         //inicializamos puntuacion
         puntuacion = 0;
         Random rd = new Random();
