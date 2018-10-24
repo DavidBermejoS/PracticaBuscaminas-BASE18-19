@@ -11,10 +11,21 @@ import java.awt.event.ActionListener;
  */
 public class ActionBoton implements ActionListener{
 
-	
+	VentanaPrincipal ventana;
+	int col;
+	int row;
+	boolean reset;
 
-	public ActionBoton() {
-		//TODO
+	public ActionBoton(VentanaPrincipal ventanaPrincipal,int col, int row) {
+		this.ventana=ventanaPrincipal;
+		this.col = col;
+		this.row = row;
+		reset=false;
+	}
+
+	public ActionBoton(VentanaPrincipal ventanaPrincipal){
+		this.ventana=ventanaPrincipal;
+		reset = true;
 	}
 	
 	/**
@@ -22,7 +33,22 @@ public class ActionBoton implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//TODO
+		ControlJuego monitor = ventana.getJuego();
+		if (reset) {
+			monitor.inicializarPartida();
+			ventana.inicializar();
+			ventana.refrescarPantalla();
+		} else {
+			if (monitor.abrirCasilla(col, row)) {
+				ventana.actualizarPuntuacion();
+				ventana.mostrarNumMinasAlrededor(col, row);
+				ventana.refrescarPantalla();
+			} else {
+				ventana.mostrarFinJuego(monitor.esFinJuego());
+				ventana.refrescarPantalla();
+			}
+
+		}
 	}
 
 }
