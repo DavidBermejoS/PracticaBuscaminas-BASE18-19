@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,18 +15,15 @@ public class ActionBoton implements ActionListener{
 	VentanaPrincipal ventana;
 	int col;
 	int row;
-	boolean reset;
 
 	public ActionBoton(VentanaPrincipal ventanaPrincipal,int col, int row) {
 		this.ventana=ventanaPrincipal;
 		this.col = col;
 		this.row = row;
-		reset=false;
 	}
 
 	public ActionBoton(VentanaPrincipal ventanaPrincipal){
 		this.ventana=ventanaPrincipal;
-		reset = true;
 	}
 	
 	/**
@@ -34,7 +32,9 @@ public class ActionBoton implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		ControlJuego monitor = ventana.getJuego();
-		if (reset) {
+		JButton botonAux =(JButton) e.getSource();
+		String botonText=botonAux.getText();
+		if (botonText.equalsIgnoreCase("Go!")) {
 			monitor.inicializarPartida();
 			ventana.inicializar();
 			ventana.refrescarPantalla();
