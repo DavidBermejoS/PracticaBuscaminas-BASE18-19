@@ -37,6 +37,9 @@ public class VentanaPrincipal {
 	
 	//LA VENTANA GUARDA UN CONTROL DE JUEGO:
 	ControlJuego juego;
+
+	//LA VENTANA EJECUTARÁ UN HILO PARA PINTAR EL TIEMPO EN EL CONTADOR
+	PaintTime paintTime;
 	
 	
 	//Constructor, marca el tamaño y el cierre del frame
@@ -45,6 +48,7 @@ public class VentanaPrincipal {
 		ventana.setBounds(100, 100, 700, 500);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		juego = new ControlJuego();
+		paintTime = new PaintTime(this);
 	}
 	
 	//Inicializa todos los componentes del frame
@@ -202,7 +206,20 @@ public class VentanaPrincipal {
 	public void actualizarPuntuacion() {
 		pantallaPuntuacion.setText(String.valueOf(juego.getPuntuacion()));
 	}
-	
+
+
+
+	/**
+	 *Método que muestra en el panel izquierdo el tiempo transcurrido en el juego.
+	 */
+	public void actualizarTiempo(String[]unidadesTiempo){
+			JLabel tiempo = new JLabel(unidadesTiempo[0]+" : "+unidadesTiempo[1]+" : "+unidadesTiempo[2]);
+			tiempo.setForeground(correspondenciaColores[5]);
+			panelImagen.add(tiempo);
+	}
+
+
+
 	/**
 	 * Método para refrescar la pantalla
 	 */
@@ -235,8 +252,13 @@ public class VentanaPrincipal {
 		ventana.setVisible(true);
 		inicializarComponentes();
 		juego.depurarTablero();
-		inicializarListeners();		
+		inicializarListeners();
+		paintTime.start();
+
 	}
+
+
+
 
 
 
