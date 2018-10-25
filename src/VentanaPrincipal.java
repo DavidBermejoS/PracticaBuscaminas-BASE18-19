@@ -40,6 +40,8 @@ public class VentanaPrincipal {
 
 	//LA VENTANA EJECUTARÁ UN HILO PARA PINTAR EL TIEMPO EN EL CONTADOR
 	PaintTime paintTime;
+	JLabel labelTiempo; //etiqueta donde se contendrá el tiempo transcurrido
+	boolean finishTime;
 	
 	
 	//Constructor, marca el tamaño y el cierre del frame
@@ -135,6 +137,8 @@ public class VentanaPrincipal {
 		//BotónEmpezar:
 		panelEmpezar.add(botonEmpezar);
 		panelPuntuacion.add(pantallaPuntuacion);
+
+		finishTime=false;
 		
 	}
 	
@@ -181,15 +185,16 @@ public class VentanaPrincipal {
 	 * @post : Todos los botones se desactivan excepto el de volver a iniciar el juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
+		finishTime=true;
 		if(porExplosion){
-			JOptionPane.showMessageDialog(ventana,"Has pisado una mina"+"\n Has obtenido un total de: "+juego.getPuntuacion(),"¡Has perdido!",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(ventana,"Has pisado una mina"+"\n Has obtenido un total de: "+juego.getPuntuacion()+"\n Has aguantado un total de: "+labelTiempo.getText(),"¡Has perdido!",JOptionPane.INFORMATION_MESSAGE);
 			for (int i = 0; i < botonesJuego.length; i++) {
 				for (int j = 0; j < botonesJuego[i].length; j++) {
 					botonesJuego[i][j].setEnabled(false);
 				}
 			}
 		}else{
-			JOptionPane.showMessageDialog(ventana,"Has conseguido detectar las minas"+"\n Has obtenido un total de: "+juego.getPuntuacion(),"¡Has Ganado!",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(ventana,"Has conseguido detectar las minas"+"\n Has obtenido un total de: "+juego.getPuntuacion()+"\n Has tardado un total de: "+labelTiempo.getText(),"¡Has Ganado!",JOptionPane.INFORMATION_MESSAGE);
 			for (int i = 0; i < botonesJuego.length; i++) {
 				for (int j = 0; j < botonesJuego[i].length; j++) {
 					botonesJuego[i][j].setEnabled(false);
@@ -213,11 +218,11 @@ public class VentanaPrincipal {
 	 */
 	public void actualizarTiempo(String[]unidadesTiempo){
 			panelImagen.removeAll();
-			JLabel tiempo = new JLabel();
-			tiempo.setText(unidadesTiempo[2]+" : "+unidadesTiempo[1]+" : "+unidadesTiempo[0]);
-			tiempo.setForeground(correspondenciaColores[5]);
-			tiempo.setHorizontalAlignment(SwingConstants.CENTER);
-			panelImagen.add(tiempo);
+			labelTiempo = new JLabel();
+			labelTiempo.setText(unidadesTiempo[2]+" : "+unidadesTiempo[1]+" : "+unidadesTiempo[0]);
+			labelTiempo.setForeground(correspondenciaColores[5]);
+			labelTiempo.setHorizontalAlignment(SwingConstants.CENTER);
+			panelImagen.add(labelTiempo);
 	}
 
 
