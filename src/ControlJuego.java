@@ -189,9 +189,9 @@ public class ControlJuego {
      */
     public String[] getTiempo(){
         LocalTime timeNow = LocalTime.now();
-        timeNow.minusHours(timeStart.getHour());
-        timeNow.minusMinutes(timeStart.getMinute());
-        timeNow.minusSeconds(timeStart.getSecond());
+        timeNow=timeNow.minusHours(timeStart.getHour());
+        timeNow=timeNow.minusMinutes(timeStart.getMinute());
+        timeNow=timeNow.minusSeconds(timeStart.getSecond());
         String[] unidadesTiempo = new String [3];
         unidadesTiempo[0]= String.valueOf(timeNow.getSecond());
         unidadesTiempo[1]= String.valueOf(timeNow.getMinute());

@@ -48,7 +48,6 @@ public class VentanaPrincipal {
 		ventana.setBounds(100, 100, 700, 500);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		juego = new ControlJuego();
-		paintTime = new PaintTime(this);
 	}
 	
 	//Inicializa todos los componentes del frame
@@ -187,7 +186,6 @@ public class VentanaPrincipal {
 			for (int i = 0; i < botonesJuego.length; i++) {
 				for (int j = 0; j < botonesJuego[i].length; j++) {
 					botonesJuego[i][j].setEnabled(false);
-					paintTime.interrupt();
 				}
 			}
 		}else{
@@ -195,7 +193,6 @@ public class VentanaPrincipal {
 			for (int i = 0; i < botonesJuego.length; i++) {
 				for (int j = 0; j < botonesJuego[i].length; j++) {
 					botonesJuego[i][j].setEnabled(false);
-					paintTime.interrupt();
 				}
 			}
 		}
@@ -215,9 +212,11 @@ public class VentanaPrincipal {
 	 *Método que muestra en el panel izquierdo el tiempo transcurrido en el juego.
 	 */
 	public void actualizarTiempo(String[]unidadesTiempo){
-			JLabel tiempo = new JLabel(unidadesTiempo[0]+" : "+unidadesTiempo[1]+" : "+unidadesTiempo[2]);
+			panelImagen.removeAll();
+			JLabel tiempo = new JLabel();
+			tiempo.setText(unidadesTiempo[2]+" : "+unidadesTiempo[1]+" : "+unidadesTiempo[0]);
 			tiempo.setForeground(correspondenciaColores[5]);
-			tiempo.setHorizontalAlignment(SwingConstants.HORIZONTAL);
+			tiempo.setHorizontalAlignment(SwingConstants.CENTER);
 			panelImagen.add(tiempo);
 	}
 
@@ -256,6 +255,7 @@ public class VentanaPrincipal {
 		inicializarComponentes();
 		juego.depurarTablero();
 		inicializarListeners();
+		paintTime = new PaintTime(this);
 		paintTime.start();
 
 	}

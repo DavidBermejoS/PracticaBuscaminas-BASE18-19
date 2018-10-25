@@ -15,6 +15,7 @@ public class PaintTime extends Thread {
             try {
                 sleep(1000);
                 ventana.actualizarTiempo(ventana.getJuego().getTiempo());
+                ventana.refrescarPantalla();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
