@@ -186,7 +186,7 @@ public class VentanaPrincipal {
 				}
 			}
 		}else{
-			JOptionPane.showMessageDialog(ventana,"Has pisado una mina"+"\n Has obtenido un total de: "+juego.getPuntuacion(),"¡Has Ganado!",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(ventana,"Has conseguido detectar las minas"+"\n Has obtenido un total de: "+juego.getPuntuacion(),"¡Has Ganado!",JOptionPane.INFORMATION_MESSAGE);
 			for (int i = 0; i < botonesJuego.length; i++) {
 				for (int j = 0; j < botonesJuego[i].length; j++) {
 					botonesJuego[i][j].setEnabled(false);
