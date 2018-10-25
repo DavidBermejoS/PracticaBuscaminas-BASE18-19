@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -36,13 +37,17 @@ public class ActionBoton implements ActionListener{
 		String botonText=botonAux.getText();
 		if (botonText.equalsIgnoreCase("Go!")) {
 			monitor.inicializarPartida();
-			ventana.inicializarComponentes();
+			ventana.getVentana().setContentPane(new JPanel(new BorderLayout()));
+			ventana.inicializar();
 			ventana.refrescarPantalla();
 		} else {
 			if (monitor.abrirCasilla(col, row)) {
 				ventana.actualizarPuntuacion();
 				ventana.mostrarNumMinasAlrededor(col, row);
 				ventana.refrescarPantalla();
+				if(ventana.getJuego().esFinJuego()){
+					ventana.mostrarFinJuego(!monitor.esFinJuego());
+				}
 			} else {
 				ventana.mostrarFinJuego(monitor.esFinJuego());
 				ventana.refrescarPantalla();
