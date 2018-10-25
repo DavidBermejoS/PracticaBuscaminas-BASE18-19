@@ -187,6 +187,7 @@ public class VentanaPrincipal {
 			for (int i = 0; i < botonesJuego.length; i++) {
 				for (int j = 0; j < botonesJuego[i].length; j++) {
 					botonesJuego[i][j].setEnabled(false);
+					paintTime.interrupt();
 				}
 			}
 		}else{
@@ -194,6 +195,7 @@ public class VentanaPrincipal {
 			for (int i = 0; i < botonesJuego.length; i++) {
 				for (int j = 0; j < botonesJuego[i].length; j++) {
 					botonesJuego[i][j].setEnabled(false);
+					paintTime.interrupt();
 				}
 			}
 		}
@@ -215,6 +217,7 @@ public class VentanaPrincipal {
 	public void actualizarTiempo(String[]unidadesTiempo){
 			JLabel tiempo = new JLabel(unidadesTiempo[0]+" : "+unidadesTiempo[1]+" : "+unidadesTiempo[2]);
 			tiempo.setForeground(correspondenciaColores[5]);
+			tiempo.setHorizontalAlignment(SwingConstants.HORIZONTAL);
 			panelImagen.add(tiempo);
 	}
 
