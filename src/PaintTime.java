@@ -11,7 +11,7 @@ public class PaintTime extends Thread {
 
     @Override
     public void run() {
-        while (!ventana.getJuego().esFinJuego()) {
+        while (!ventana.finishTime) {
             try {
                 sleep(1000);
                 ventana.actualizarTiempo(ventana.getJuego().getTiempo());
