@@ -233,7 +233,8 @@ public class VentanaPrincipal {
 	public void inicializar(){
 		//IMPORTANTE, PRIMERO HACEMOS LA VENTANA VISIBLE Y LUEGO INICIALIZAMOS LOS COMPONENTES.
 		ventana.setVisible(true);
-		inicializarComponentes();	
+		inicializarComponentes();
+		juego.depurarTablero();
 		inicializarListeners();		
 	}
 
