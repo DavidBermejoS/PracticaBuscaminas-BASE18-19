@@ -1,3 +1,4 @@
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -15,6 +16,8 @@ public class ControlJuego {
     private final static int MINA = -1;
     final int MINAS_INICIALES = 20;
     final int LADO_TABLERO = 10;
+    LocalTime timeStart;
+
 
     private int[][] tablero;
     private int puntuacion;
@@ -37,6 +40,9 @@ public class ControlJuego {
      */
     public void inicializarPartida() {
         //TODO: Repartir minas e inicializar puntacion. Si hubiese un tablero anterior, lo pongo todo a cero para inicializarlo.
+
+        //inicializamos el temporizador
+        timeStart = LocalTime.now();
 
         //ponemos todo el tablero a 0
         for (int i = 0; i < tablero.length; i++) {
@@ -175,6 +181,22 @@ public class ControlJuego {
     public int getPuntuacion() {
         return puntuacion;
 
+    }
+
+    /**
+     * Metodo que obtiene el tiempo actual
+     * @return Un array de string con la hora, minutos y segundos desde que comenzó la partida
+     */
+    public String[] getTiempo(){
+        LocalTime timeNow = LocalTime.now();
+        timeNow.minusHours(timeStart.getHour());
+        timeNow.minusMinutes(timeStart.getMinute());
+        timeNow.minusSeconds(timeStart.getSecond());
+        String[] unidadesTiempo = new String [3];
+        unidadesTiempo[0]= String.valueOf(timeNow.getSecond());
+        unidadesTiempo[1]= String.valueOf(timeNow.getMinute());
+        unidadesTiempo[2]= String.valueOf(timeNow.getHour());
+        return unidadesTiempo;
     }
 
 }
