@@ -37,6 +37,11 @@ public class VentanaPrincipal {
 	
 	//LA VENTANA GUARDA UN CONTROL DE JUEGO:
 	ControlJuego juego;
+
+	//LA VENTANA EJECUTARÁ UN HILO PARA PINTAR EL TIEMPO EN EL CONTADOR
+	PaintTime paintTime;
+	JLabel labelTiempo; //etiqueta donde se contendrá el tiempo transcurrido
+	boolean finishTime;
 	
 	
 	//Constructor, marca el tamaño y el cierre del frame
@@ -132,6 +137,8 @@ public class VentanaPrincipal {
 		//BotónEmpezar:
 		panelEmpezar.add(botonEmpezar);
 		panelPuntuacion.add(pantallaPuntuacion);
+
+		finishTime=false;
 		
 	}
 	
@@ -178,15 +185,16 @@ public class VentanaPrincipal {
 	 * @post : Todos los botones se desactivan excepto el de volver a iniciar el juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
+		finishTime=true;
 		if(porExplosion){
-			JOptionPane.showMessageDialog(ventana,"Has pisado una mina"+"\n Has obtenido un total de: "+juego.getPuntuacion(),"¡Has perdido!",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(ventana,"Has pisado una mina"+"\n Has obtenido un total de: "+juego.getPuntuacion()+"\n Has aguantado un total de: "+labelTiempo.getText(),"¡Has perdido!",JOptionPane.INFORMATION_MESSAGE);
 			for (int i = 0; i < botonesJuego.length; i++) {
 				for (int j = 0; j < botonesJuego[i].length; j++) {
 					botonesJuego[i][j].setEnabled(false);
 				}
 			}
 		}else{
-			JOptionPane.showMessageDialog(ventana,"Has conseguido detectar las minas"+"\n Has obtenido un total de: "+juego.getPuntuacion(),"¡Has Ganado!",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(ventana,"Has conseguido detectar las minas"+"\n Has obtenido un total de: "+juego.getPuntuacion()+"\n Has tardado un total de: "+labelTiempo.getText(),"¡Has Ganado!",JOptionPane.INFORMATION_MESSAGE);
 			for (int i = 0; i < botonesJuego.length; i++) {
 				for (int j = 0; j < botonesJuego[i].length; j++) {
 					botonesJuego[i][j].setEnabled(false);
@@ -202,7 +210,23 @@ public class VentanaPrincipal {
 	public void actualizarPuntuacion() {
 		pantallaPuntuacion.setText(String.valueOf(juego.getPuntuacion()));
 	}
-	
+
+
+
+	/**
+	 *Método que muestra en el panel izquierdo el tiempo transcurrido en el juego.
+	 */
+	public void actualizarTiempo(String[]unidadesTiempo){
+			panelImagen.removeAll();
+			labelTiempo = new JLabel();
+			labelTiempo.setText(unidadesTiempo[2]+" : "+unidadesTiempo[1]+" : "+unidadesTiempo[0]);
+			labelTiempo.setForeground(correspondenciaColores[5]);
+			labelTiempo.setHorizontalAlignment(SwingConstants.CENTER);
+			panelImagen.add(labelTiempo);
+	}
+
+
+
 	/**
 	 * Método para refrescar la pantalla
 	 */
@@ -235,8 +259,14 @@ public class VentanaPrincipal {
 		ventana.setVisible(true);
 		inicializarComponentes();
 		juego.depurarTablero();
-		inicializarListeners();		
+		inicializarListeners();
+		paintTime = new PaintTime(this);
+		paintTime.start();
+
 	}
+
+
+
 
 
 
