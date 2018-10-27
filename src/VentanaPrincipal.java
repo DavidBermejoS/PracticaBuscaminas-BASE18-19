@@ -41,8 +41,9 @@ public class VentanaPrincipal {
 	//LA VENTANA EJECUTARÁ UN HILO PARA PINTAR EL TIEMPO EN EL CONTADOR
 	PaintTime paintTime;
 	JLabel labelTiempo; //etiqueta donde se contendrá el tiempo transcurrido
+	//booleano para controlar el final de la ejecución del hilo PainTime
 	boolean finishTime;
-	
+
 	
 	//Constructor, marca el tamaño y el cierre del frame
 	public VentanaPrincipal() {
@@ -138,8 +139,9 @@ public class VentanaPrincipal {
 		panelEmpezar.add(botonEmpezar);
 		panelPuntuacion.add(pantallaPuntuacion);
 
+		//cuando se cargan los componentes se marca el final de partida a false
 		finishTime=false;
-		
+
 	}
 	
 	/**
@@ -186,7 +188,13 @@ public class VentanaPrincipal {
 	 * @post : Todos los botones se desactivan excepto el de volver a iniciar el juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
+		String user;
+		int option;
+		WriteScore ws;
+
+		//se define el final de la partida poniendo el finishTime a true para que el hilo deje de pintar por pantalla el tiempo.
 		finishTime=true;
+
 		if(porExplosion){
 			JOptionPane.showMessageDialog(ventana,"Has pisado una mina"+"\n Has obtenido un total de: "+juego.getPuntuacion()+"\n Has aguantado un total de: "+labelTiempo.getText(),"¡Has perdido!",JOptionPane.INFORMATION_MESSAGE);
 			for (int i = 0; i < botonesJuego.length; i++) {
@@ -201,6 +209,17 @@ public class VentanaPrincipal {
 					botonesJuego[i][j].setEnabled(false);
 				}
 			}
+		}
+
+		//este bloque se encarga de escribir por pantalla elusuario que ha jugado junto con su puntuación y tiempo
+		user = JOptionPane.showInputDialog(null,"Escribe tu nombre para guardarlo en el fichero de puntuación ");
+		ws = new WriteScore(this);
+		ws.writeFile(user);
+
+		//este bloque lo utilizaremos para preguntar al usuario si quiere seguir jugando o si quiere cerrar el juego
+		option = JOptionPane.showConfirmDialog(null, "¿Quieres cerrar el juego? (Si pulsas que no, podrás reiniciar el juego en el botón principal 'Go!') ", "¿Quieres cerrar el juego?", JOptionPane.YES_NO_OPTION);
+		if(option == JOptionPane.YES_OPTION){
+			System.exit(0);
 		}
 
 	}
