@@ -51,7 +51,7 @@ public class ActionBoton implements ActionListener{
 					ventana.mostrarFinJuego(!monitor.esFinJuego());
 				}
 			} else {
-				ventana.mostrarFinJuego(monitor.esFinJuego());
+				ventana.mostrarFinJuego(!monitor.esFinJuego());
 				ventana.refrescarPantalla();
 			}
 		}
