@@ -34,13 +34,15 @@ public class ActionBoton implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		ControlJuego monitor = ventana.getJuego();
 		JButton botonAux =(JButton) e.getSource();
-		String botonText=botonAux.getText();
-		if (botonText.equalsIgnoreCase("Go!")) {
+
+		if (botonAux.getText().equalsIgnoreCase("Go!")) {
 			monitor.inicializarPartida();
 			ventana.getVentana().setContentPane(new JPanel(new BorderLayout()));
 			ventana.inicializar();
 			ventana.refrescarPantalla();
-		} else {
+		}
+
+		if(botonAux.getText().equalsIgnoreCase("-")) {
 			if (monitor.abrirCasilla(col, row)) {
 				ventana.actualizarPuntuacion();
 				ventana.mostrarNumMinasAlrededor(col, row);
@@ -52,7 +54,6 @@ public class ActionBoton implements ActionListener{
 				ventana.mostrarFinJuego(monitor.esFinJuego());
 				ventana.refrescarPantalla();
 			}
-
 		}
 	}
 
