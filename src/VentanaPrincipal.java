@@ -216,6 +216,10 @@ public class VentanaPrincipal {
 		ws = new WriteScore(this);
 		ws.writeFile(user);
 
+
+		String highscore=ws.showFileInfo();
+		JOptionPane.showMessageDialog(this.ventana,highscore,"¡TABLA DE HIGHSCORE!",JOptionPane.INFORMATION_MESSAGE);
+
 		//este bloque lo utilizaremos para preguntar al usuario si quiere seguir jugando o si quiere cerrar el juego
 		option = JOptionPane.showConfirmDialog(null, "¿Quieres cerrar el juego? (Si pulsas que no, podrás reiniciar el juego en el botón principal 'Go!') ", "¿Quieres cerrar el juego?", JOptionPane.YES_NO_OPTION);
 		if(option == JOptionPane.YES_OPTION){
@@ -239,7 +243,7 @@ public class VentanaPrincipal {
 	public void actualizarTiempo(String[]unidadesTiempo){
 			panelImagen.removeAll();
 			labelTiempo = new JLabel();
-			labelTiempo.setText(unidadesTiempo[2]+" : "+unidadesTiempo[1]+" : "+unidadesTiempo[0]);
+			labelTiempo.setText(unidadesTiempo[2]+"-"+unidadesTiempo[1]+"-"+unidadesTiempo[0]);
 			labelTiempo.setForeground(correspondenciaColores[5]);
 			labelTiempo.setHorizontalAlignment(SwingConstants.CENTER);
 			panelImagen.add(labelTiempo);
