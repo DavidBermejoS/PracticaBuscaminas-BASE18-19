@@ -2,8 +2,6 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -218,9 +216,8 @@ public class VentanaPrincipal {
      * @post : Todos los botones se desactivan excepto el de volver a iniciar el juego.
      */
     public void mostrarFinJuego(boolean porExplosion) {
-        String user;
         int option;
-        WriteScore ws;
+
 
         //se define el final de la partida poniendo el finishTime a true para que el hilo deje de pintar por pantalla el tiempo.
         finishTime = true;
@@ -240,21 +237,30 @@ public class VentanaPrincipal {
                 }
             }
         }
-
-        //este bloque se encarga de escribir por pantalla elusuario que ha jugado junto con su puntuación y tiempo
-        user = JOptionPane.showInputDialog(null, "Escribe tu nombre para guardarlo en el fichero de puntuación ");
-        ws = new WriteScore(this);
-        ws.writeFile(user);
-
-
-        String highscore = ws.showFileInfo();
-        JOptionPane.showMessageDialog(this.ventana, highscore, "¡TABLA DE HIGHSCORE!", JOptionPane.INFORMATION_MESSAGE);
-
+        showHighScorePanels();
         //este bloque lo utilizaremos para preguntar al usuario si quiere seguir jugando o si quiere cerrar el juego
         option = JOptionPane.showConfirmDialog(null, "¿Quieres cerrar el juego? (Si pulsas que no, podrás reiniciar el juego en el botón principal 'Go!') ", "¿Quieres cerrar el juego?", JOptionPane.YES_NO_OPTION);
         if (option == JOptionPane.YES_OPTION) {
             System.exit(0);
         }
+
+    }
+
+    /**
+     * Metodo encargado de mostrar al usuario dos paneles relativos a la puntuación.
+     * Uno de ellos le preguntará al nombre para posteriormente guardarlo en un fichero y el segundo
+     * muestra los paneles de los mejores clasificados
+     * @since v1.7.0
+     */
+    public void showHighScorePanels(){
+        String user;
+        WriteScore ws;
+        //este bloque se encarga de escribir por pantalla elusuario que ha jugado junto con su puntuación y tiempo
+        user = JOptionPane.showInputDialog(null, "Escribe tu nombre para guardarlo en el fichero de puntuación ");
+        ws = new WriteScore(this);
+        ws.writeFile(user);
+        String highscore = ws.showFileInfo();
+        JOptionPane.showMessageDialog(this.ventana, highscore, "¡TABLA DE HIGHSCORE!", JOptionPane.INFORMATION_MESSAGE);
 
     }
 

@@ -34,9 +34,9 @@ public class WriteScore {
             Collections.sort(users);
             for (int i = 0; i < 10; i++) {
                 if(users.size()>i){
-                    info += "\n"+(i + 1) + "- Nombre: " + users.get(i).name + " --- Puntuacion: " + users.get(i).score + " --- Tiempo: " + users.get(i).time;
+                    info += "\n"+(i + 1) + "- Nombre: " + users.get(i).name + " ---> Puntuacion: " + users.get(i).score + " ---> Tiempo: " + users.get(i).time;
                 }else{
-                    info+="\n*******************************************************";
+                    info += "\n"+(i + 1) + "- Nombre: " + "_________"+ " ---> Puntuacion: " + "_________" + " ---> Tiempo: " + "_________";
                 }
             }
         } catch (FileNotFoundException e) {
