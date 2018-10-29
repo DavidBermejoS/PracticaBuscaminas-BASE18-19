@@ -48,10 +48,10 @@ public class ActionBoton implements ActionListener{
 				ventana.mostrarNumMinasAlrededor(col, row);
 				ventana.refrescarPantalla();
 				if(ventana.getJuego().esFinJuego()){
-					ventana.mostrarFinJuego(!monitor.esFinJuego());
+					ventana.mostrarFinJuego(false);
 				}
 			} else {
-				ventana.mostrarFinJuego(!monitor.esFinJuego());
+				ventana.mostrarFinJuego(true);
 				ventana.refrescarPantalla();
 			}
 		}

@@ -39,9 +39,24 @@ public class MouseAction implements MouseListener {
         }
     }
 
+    /**
+     * Metodo que indica que acciones se llevarán a cabo cuando se pulse el botón central del mouse
+     * @param mouseEvent evento del mouse
+     * @since v1.6.0
+     */
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
-
+        ControlJuego monitor = ventana.getJuego();
+        if (SwingUtilities.isMiddleMouseButton(mouseEvent)) {
+            if(ventana.mostrarGrupoCasillas(col, row)){
+                ventana.mostrarFinJuego(!monitor.esFinJuego());
+            }
+            ventana.actualizarPuntuacion();
+            ventana.refrescarPantalla();
+            if (ventana.getJuego().esFinJuego()) {
+                ventana.mostrarFinJuego(!monitor.esFinJuego());
+            }
+        }
     }
 
     @Override
