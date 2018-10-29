@@ -52,7 +52,7 @@ public class VentanaPrincipal {
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		juego = new ControlJuego();
 	}
-	
+
 	//Inicializa todos los componentes del frame
 	public void inicializarComponentes(){
 		
@@ -151,7 +151,7 @@ public class VentanaPrincipal {
 		for (int i = 0; i < botonesJuego.length; i++) {
 			for (int j = 0; j < botonesJuego[i].length; j++) {
 				botonesJuego[i][j].addActionListener(new ActionBoton(this,i,j));
-				botonesJuego[i][j].addMouseListener(new MouseAction(this));
+				botonesJuego[i][j].addMouseListener(new MouseAction(this,i,j));
 			}
 		}
 

@@ -11,9 +11,17 @@ import java.awt.event.MouseListener;
 public class MouseAction implements MouseListener {
     VentanaPrincipal ventana;
     JButton buttonAux;
+    int col;
+    int row;
 
     public MouseAction(VentanaPrincipal ventana) {
         this.ventana = ventana;
+    }
+
+    public MouseAction(VentanaPrincipal ventana, int i, int j) {
+        this.ventana = ventana;
+        this.col = i;
+        this.row = j;
     }
 
     @Override
