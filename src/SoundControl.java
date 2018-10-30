@@ -28,9 +28,18 @@ public class SoundControl extends Thread {
         try {
             clip = AudioSystem.getClip();
             if (sonido.equals("click")) {
-                 audioStream = AudioSystem.getAudioInputStream(new File("resources/click.wav"));
+                audioStream = AudioSystem.getAudioInputStream(new File("resources/click.wav"));
             } else if (sonido.equals("mina")) {
-                 audioStream = AudioSystem.getAudioInputStream(new File("resources/mina.wav"));
+                //si el sistema operativo en el que se ejecuta el programa es de la familia windows
+                if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
+                    System.out.println(System.getProperty("os.name").toLowerCase());
+                    audioStream = AudioSystem.getAudioInputStream(new File("resources/Grenade.wav"));
+                    //si el sistema operativo en el que se ejecuta el programa es de la familia unix
+                }else if(System.getProperty("os.name").toLowerCase().indexOf("nix")>=0){
+                    audioStream = AudioSystem.getAudioInputStream(new File("resources/mina.wav"));
+                }
+
+
             }
             clip.open(audioStream);
             clip.start();
