@@ -28,6 +28,7 @@ public class MouseAction implements MouseListener {
     public void mouseClicked(MouseEvent mouseEvent) {
         buttonAux = (JButton) mouseEvent.getSource();
         if (SwingUtilities.isRightMouseButton(mouseEvent)) {
+            SoundControl sc = new SoundControl("click");
             if (buttonAux.getText().equals("-")) {
                 Icon flag = new ImageIcon("resources/flag_orange.png");
                 buttonAux.setIcon(flag);
@@ -48,6 +49,7 @@ public class MouseAction implements MouseListener {
     public void mousePressed(MouseEvent mouseEvent) {
         ControlJuego monitor = ventana.getJuego();
         if (SwingUtilities.isMiddleMouseButton(mouseEvent)) {
+            SoundControl sc = new SoundControl("click");
             if(ventana.mostrarGrupoCasillas(col, row)){
                 ventana.mostrarFinJuego(!monitor.esFinJuego());
             }
