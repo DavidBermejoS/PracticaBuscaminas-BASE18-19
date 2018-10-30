@@ -44,6 +44,7 @@ public class ActionBoton implements ActionListener{
 
 		if(botonAux.getText().equalsIgnoreCase("-")) {
 			if (monitor.abrirCasilla(col, row)) {
+				SoundControl sc = new SoundControl("click");
 				ventana.actualizarPuntuacion();
 				ventana.mostrarNumMinasAlrededor(col, row);
 				ventana.refrescarPantalla();
@@ -51,6 +52,7 @@ public class ActionBoton implements ActionListener{
 					ventana.mostrarFinJuego(false);
 				}
 			} else {
+				SoundControl sc = new SoundControl("mina");
 				ventana.mostrarFinJuego(true);
 				ventana.refrescarPantalla();
 			}
