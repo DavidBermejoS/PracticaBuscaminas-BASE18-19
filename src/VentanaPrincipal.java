@@ -159,8 +159,9 @@ public class VentanaPrincipal {
     /**
      * Pinta en la pantalla el número de minas que hay alrededor de la celda
      * Saca el botón que haya en la celda determinada y añade un JLabel centrado y no editable con el número de minas alrededor.
+     * además, si la casilla abierta es una casilla que no tenga minas alrededor, llamará al metodo mostrarGrupoCasillas para
+     * abrir recursivamente todas aquellas casillas que no tengan minas alrededor.
      * Se pinta el color del texto según la siguiente correspondecia (consultar la variable correspondeciaColor):
-     * - 0 : negro
      * - 1 : cyan
      * - 2 : verde
      * - 3 : naranja
@@ -174,9 +175,15 @@ public class VentanaPrincipal {
         int minasAlrededor = juego.getMinasAlrededor(i, j);
         botonesJuego[i][j].setVisible(false);
         JLabel label = new JLabel(String.valueOf(minasAlrededor));
+        if(minasAlrededor == 0){
+            label = new JLabel(" ");
+        }
         label.setHorizontalAlignment(SwingConstants.HORIZONTAL);
         label.setForeground(correspondenciaColores[minasAlrededor]);
         panelesJuego[i][j].add(label);
+        if(minasAlrededor==0){
+            mostrarGrupoCasillas(i,j);
+        }
     }
 
     /**
