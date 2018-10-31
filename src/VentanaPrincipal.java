@@ -175,14 +175,14 @@ public class VentanaPrincipal {
         int minasAlrededor = juego.getMinasAlrededor(i, j);
         botonesJuego[i][j].setVisible(false);
         JLabel label = new JLabel(String.valueOf(minasAlrededor));
-        if(minasAlrededor == 0){
+        if (minasAlrededor == 0) {
             label = new JLabel(" ");
         }
         label.setHorizontalAlignment(SwingConstants.HORIZONTAL);
         label.setForeground(correspondenciaColores[minasAlrededor]);
         panelesJuego[i][j].add(label);
-        if(minasAlrededor==0){
-            mostrarGrupoCasillas(i,j);
+        if (minasAlrededor == 0) {
+            mostrarGrupoCasillas(i, j);
         }
     }
 
@@ -197,12 +197,15 @@ public class VentanaPrincipal {
      * @since v1.6.0
      */
     public boolean mostrarGrupoCasillas(int i, int j) {
+        boolean countedButton=false; //nos indicará la pieza i j como chequeada o no para no contarla en la puntuación 2 veces
         for (int k = i - 1; k < i + 2; k++) {
             for (int l = j - 1; l < j + 2; l++) {
                 try {
                     if (botonesJuego[k][l].getIcon() == null) {
-                        if (juego.abrirCasilla(k, l) && botonesJuego[k][l].isVisible()) {
-                            mostrarNumMinasAlrededor(k, l);
+                        if (botonesJuego[k][l].isVisible()) {
+                            if (juego.abrirCasilla(k, l)) {
+                                mostrarNumMinasAlrededor(k, l);
+                            }
                         } else if (!juego.abrirCasilla(k, l)) {
                             return true;
                         }
@@ -257,9 +260,10 @@ public class VentanaPrincipal {
      * Metodo encargado de mostrar al usuario dos paneles relativos a la puntuación.
      * Uno de ellos le preguntará al nombre para posteriormente guardarlo en un fichero y el segundo
      * muestra los paneles de los mejores clasificados
+     *
      * @since v1.7.0
      */
-    public void showHighScorePanels(){
+    public void showHighScorePanels() {
         String user;
         WriteScore ws;
         //este bloque se encarga de escribir por pantalla elusuario que ha jugado junto con su puntuación y tiempo
@@ -275,7 +279,18 @@ public class VentanaPrincipal {
      * Método que muestra la puntuación por pantalla.
      */
     public void actualizarPuntuacion() {
-        pantallaPuntuacion.setText(String.valueOf(juego.getPuntuacion()));
+        int countScore=0;
+        for (int i = 0; i < juego.LADO_TABLERO; i++) {
+            for (int j = 0; j < juego.LADO_TABLERO; j++) {
+                if(!botonesJuego[i][j].isVisible()){
+                    countScore++;
+                }
+
+            }
+
+        }
+        pantallaPuntuacion.setText(String.valueOf(countScore));
+        juego.actualizarPuntuacion(countScore);
     }
 
 

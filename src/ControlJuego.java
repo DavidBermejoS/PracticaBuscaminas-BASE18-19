@@ -104,7 +104,8 @@ public class ControlJuego {
     }
 
     /**
-     * Método que nos permite
+     * Método que nos permite verificar si podemos abrir una casilla. Para ello se comprobará que no existe una mina
+     * en el interior de la misma.k
      *
      * @param i: posición verticalmente de la casilla a abrir
      * @param j: posición horizontalmente de la casilla a abrir
@@ -115,8 +116,11 @@ public class ControlJuego {
         if(tablero[i][j]==MINA){
             return false;
         }
-        puntuacion+=1;
         return true;
+    }
+
+    public void actualizarPuntuacion(int score){
+        this.puntuacion=score;
     }
 
 
