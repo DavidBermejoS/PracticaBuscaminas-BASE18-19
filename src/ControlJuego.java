@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
+ * <h2>Clase ControlJuego</h2>
  * Clase gestora del tablero de juego.
  * Guarda una matriz de enteros representado el tablero.
  * Si hay una mina en una posición guarda el número -1
@@ -10,19 +11,39 @@ import java.util.Random;
  * Almacena la puntuación de la partida
  *
  * @author David Bermejo Simon
+ * @author Jesus Redondo Garcia
+ * @since v1.0.0
  */
 public class ControlJuego {
 
     private final static int MINA = -1;
     final int MINAS_INICIALES = 20;
     final int LADO_TABLERO = 10;
+    /**
+     * LocalTime timeStart : variable donde se almacenará el tiempo exacto en el que se inició la partida
+     */
     LocalTime timeStart;
 
-
+    /**
+     * int [][] tablero : tablero de enteros donde se colocarán las minas (con valor -1) y posteriormente se
+     * añadirán en el resto de posiciones cuantas minas rodean a la misma posicion (en el método calculoMinasAdjuntas)
+     *
+     * @see ControlJuego#calculoMinasAdjuntas(int, int)
+     */
     private int[][] tablero;
+    /**
+     * int puntuacion : puntuación total del jugador en la partida. Se actualiza desde el metodo actualizarPuntuacion
+     *
+     * @see ControlJuego#actualizarPuntuacion(int)
+     */
     private int puntuacion;
 
-
+    /**
+     * <b>Constructor de la clase</b>
+     * Crea el tablero y posteriormente inicializa la partida en el método inicializarPartida
+     *
+     * @see ControlJuego#inicializarPartida()
+     */
     public ControlJuego() {
         //Creamos el tablero:
         tablero = new int[LADO_TABLERO][LADO_TABLERO];
@@ -33,10 +54,6 @@ public class ControlJuego {
 
     /**
      * Método para generar un nuevo tablero de partida:
-     *
-     * @pre: La estructura tablero debe existir.
-     * @post: Al final el tablero se habrá inicializado con tantas minas como marque la variable MINAS_INICIALES.
-     * El resto de posiciones que no son minas guardan en el entero cuántas minas hay alrededor de la celda
      */
     public void inicializarPartida() {
         //TODO: Repartir minas e inicializar puntacion. Si hubiese un tablero anterior, lo pongo todo a cero para inicializarlo.
@@ -47,7 +64,7 @@ public class ControlJuego {
         //ponemos todo el tablero a 0
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
-                tablero[i][j]=0;
+                tablero[i][j] = 0;
             }
         }
 
@@ -75,6 +92,7 @@ public class ControlJuego {
         }
     }
 
+
     /**
      * Cálculo de las minas adjuntas:
      * Para calcular el número de minas tenemos que tener en cuenta que no nos salimos nunca del tablero.
@@ -86,16 +104,16 @@ public class ControlJuego {
      * @return : El número de minas que hay alrededor de la casilla [i][j]
      **/
     private int calculoMinasAdjuntas(int i, int j) {
-        int countMinas=0;
+        int countMinas = 0;
         //Se hace el recuento de las minas que hay alrededor del boton pulsado
-        for (int k = i-1; k < i+2; k++) {
-            for (int l = j-1; l < j+2; l++) {
+        for (int k = i - 1; k < i + 2; k++) {
+            for (int l = j - 1; l < j + 2; l++) {
                 //colocamos un try/catch para controlar la excepcion de los bordes del tablero
                 try {
                     if (tablero[k][l] == MINA) {
                         countMinas++;
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
 
                 }
             }
@@ -110,17 +128,21 @@ public class ControlJuego {
      * @param i: posición verticalmente de la casilla a abrir
      * @param j: posición horizontalmente de la casilla a abrir
      * @return : Verdadero si no ha explotado una mina. Falso en caso contrario.
-     * @pre : La casilla nunca debe haber sido abierta antes, no es controlado por el ControlJuego. Por lo tanto siempre sumaremos puntos
      */
     public boolean abrirCasilla(int i, int j) {
-        if(tablero[i][j]==MINA){
+        if (tablero[i][j] == MINA) {
             return false;
         }
         return true;
     }
 
-    public void actualizarPuntuacion(int score){
-        this.puntuacion=score;
+    /**
+     * Metodo para actualizar la puntuación del juego
+     *
+     * @param score : puntuación actual en el transcurso del juego
+     */
+    public void actualizarPuntuacion(int score) {
+        this.puntuacion = score;
     }
 
 
@@ -130,7 +152,7 @@ public class ControlJuego {
      * @return Devuelve verdadero si se han abierto todas las celdas que no son minas.
      **/
     public boolean esFinJuego() {
-        if(puntuacion==(LADO_TABLERO*LADO_TABLERO)-MINAS_INICIALES){
+        if (puntuacion == (LADO_TABLERO * LADO_TABLERO) - MINAS_INICIALES) {
             return true;
         }
         return false;
@@ -157,19 +179,18 @@ public class ControlJuego {
      * @param i : posición vertical de la celda.
      * @param j : posición horizontal de la cela.
      * @return Un entero que representa el número de minas alrededor de la celda
-     * @pre : El tablero tiene que estar ya inicializado, por lo tanto no hace falta calcularlo, símplemente consultarlo
      */
     public int getMinasAlrededor(int i, int j) {
-        int countMinas=0;
+        int countMinas = 0;
         //Se hace el recuento de las minas que hay alrededor del boton pulsado
-        for (int k = i-1; k < i+2; k++) {
-            for (int l = j-1; l < j+2; l++) {
+        for (int k = i - 1; k < i + 2; k++) {
+            for (int l = j - 1; l < j + 2; l++) {
                 //colocamos un try/catch para controlar la excepcion de los bordes del tablero
                 try {
                     if (tablero[k][l] == MINA) {
                         countMinas++;
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
 
                 }
             }
@@ -188,18 +209,19 @@ public class ControlJuego {
     }
 
     /**
-     * Metodo que obtiene el tiempo actual
+     * Metodo que obtiene el tiempo actual entre el inicio de la partida y el tiempo actual
+     *
      * @return Un array de string con la hora, minutos y segundos desde que comenzó la partida
      */
-    public String[] getTiempo(){
+    public String[] getTiempo() {
         LocalTime timeNow = LocalTime.now();
-        timeNow=timeNow.minusHours(timeStart.getHour());
-        timeNow=timeNow.minusMinutes(timeStart.getMinute());
-        timeNow=timeNow.minusSeconds(timeStart.getSecond());
-        String[] unidadesTiempo = new String [3];
-        unidadesTiempo[0]= String.valueOf(timeNow.getSecond());
-        unidadesTiempo[1]= String.valueOf(timeNow.getMinute());
-        unidadesTiempo[2]= String.valueOf(timeNow.getHour());
+        timeNow = timeNow.minusHours(timeStart.getHour());
+        timeNow = timeNow.minusMinutes(timeStart.getMinute());
+        timeNow = timeNow.minusSeconds(timeStart.getSecond());
+        String[] unidadesTiempo = new String[3];
+        unidadesTiempo[0] = String.valueOf(timeNow.getSecond());
+        unidadesTiempo[1] = String.valueOf(timeNow.getMinute());
+        unidadesTiempo[2] = String.valueOf(timeNow.getHour());
         return unidadesTiempo;
     }
 

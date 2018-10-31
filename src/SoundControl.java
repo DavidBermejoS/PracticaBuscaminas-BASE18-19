@@ -4,15 +4,19 @@ import javax.sound.sampled.*;
 import java.io.*;
 
 /**
+ * <h2>Clase SoundConrol</h2>
  * Clase encargada de reproducir los sonidos al clickear en una casilla libre
- * o en una mina.
+ * o en una mina. Esta clase hereda de la clase Thread
+ *
+ * @author David Bermejo Simon
+ * @see Thread
  * <p>
  * Los recursos han sido bajados de:
- *
  * @see <a href="http://soundbible.com">Soundbible</a>
- * <p>
  * El sonido de la explosión es obra de Daniel Simon. Puedes encontrar el recurso en:
  * @see <a href="http://soundbible.com/2140-Grenade-Launcher-2.html">Sounbible granade launcher</a>
+ * </p>
+ * @since v1.10.0
  */
 public class SoundControl extends Thread {
 
@@ -20,7 +24,9 @@ public class SoundControl extends Thread {
     Clip clip;
 
     /**
-     * Constructor de la clase donde se inicializarán los sonidos
+     * <b>Constructor de la clase</b>
+     * Aquí se  inicializarán los sonidos a reproducir dependiendo del sistema operativo en el que se ejecute el
+     * programa
      *
      * @param sonido : cadena de texto con el sonido a ejecutar
      */
