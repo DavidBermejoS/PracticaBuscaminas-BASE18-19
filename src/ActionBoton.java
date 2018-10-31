@@ -53,6 +53,7 @@ public class ActionBoton implements ActionListener{
 				}
 			} else {
 				SoundControl sc = new SoundControl("mina");
+				ventana.printMines();
 				ventana.mostrarFinJuego(true);
 				ventana.refrescarPantalla();
 			}

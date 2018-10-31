@@ -2,14 +2,7 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 
 public class VentanaPrincipal {
@@ -197,7 +190,6 @@ public class VentanaPrincipal {
      * @since v1.6.0
      */
     public boolean mostrarGrupoCasillas(int i, int j) {
-        boolean countedButton=false; //nos indicará la pieza i j como chequeada o no para no contarla en la puntuación 2 veces
         for (int k = i - 1; k < i + 2; k++) {
             for (int l = j - 1; l < j + 2; l++) {
                 try {
@@ -205,9 +197,9 @@ public class VentanaPrincipal {
                         if (botonesJuego[k][l].isVisible()) {
                             if (juego.abrirCasilla(k, l)) {
                                 mostrarNumMinasAlrededor(k, l);
+                            }else if (!juego.abrirCasilla(k, l)) {
+                                return false;
                             }
-                        } else if (!juego.abrirCasilla(k, l)) {
-                            return true;
                         }
                     }
                 } catch (Exception e) {
@@ -215,7 +207,7 @@ public class VentanaPrincipal {
                 }
             }
         }
-        return false;
+        return true;
     }
 
 
@@ -248,13 +240,28 @@ public class VentanaPrincipal {
             }
         }
         showHighScorePanels();
-        //este bloque lo utilizaremos para preguntar al usuario si quiere seguir jugando o si quiere cerrar el juego
-        option = JOptionPane.showConfirmDialog(null, "¿Quieres cerrar el juego? (Si pulsas que no, podrás reiniciar el juego en el botón principal 'Go!') ", "¿Quieres cerrar el juego?", JOptionPane.YES_NO_OPTION);
-        if (option == JOptionPane.YES_OPTION) {
-            System.exit(0);
+
+
+    }
+
+    /**
+     * Metodo encargado de pintar en los paneles todas las minas si el usuario pulsa sobre una de ellas
+     *
+     * @since v1.13.0
+     */
+    public void printMines() {
+        for (int i = 0; i < juego.LADO_TABLERO; i++) {
+            for (int j = 0; j < juego.LADO_TABLERO; j++) {
+                if (!juego.abrirCasilla(i, j)) {
+                    Icon mine = new ImageIcon("resources/mine.png");
+                    botonesJuego[i][j].setText(" ");
+                    botonesJuego[i][j].setIcon(mine);
+                }
+            }
         }
 
     }
+
 
     /**
      * Metodo encargado de mostrar al usuario dos paneles relativos a la puntuación.
@@ -277,12 +284,14 @@ public class VentanaPrincipal {
 
     /**
      * Método que muestra la puntuación por pantalla.
+     *
+     * @since v1.12.0
      */
     public void actualizarPuntuacion() {
-        int countScore=0;
+        int countScore = 0;
         for (int i = 0; i < juego.LADO_TABLERO; i++) {
             for (int j = 0; j < juego.LADO_TABLERO; j++) {
-                if(!botonesJuego[i][j].isVisible()){
+                if (!botonesJuego[i][j].isVisible()) {
                     countScore++;
                 }
 

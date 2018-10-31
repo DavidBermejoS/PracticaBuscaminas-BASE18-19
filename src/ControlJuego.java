@@ -75,6 +75,7 @@ public class ControlJuego {
         }
     }
 
+
     /**
      * Cálculo de las minas adjuntas:
      * Para calcular el número de minas tenemos que tener en cuenta que no nos salimos nunca del tablero.

@@ -48,15 +48,21 @@ public class MouseAction implements MouseListener {
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
         ControlJuego monitor = ventana.getJuego();
+        SoundControl sc;
         if (SwingUtilities.isMiddleMouseButton(mouseEvent)) {
-            SoundControl sc = new SoundControl("click");
-            if(ventana.mostrarGrupoCasillas(col, row)){
-                ventana.mostrarFinJuego(!monitor.esFinJuego());
-            }
-            ventana.actualizarPuntuacion();
-            ventana.refrescarPantalla();
-            if (ventana.getJuego().esFinJuego()) {
-                ventana.mostrarFinJuego(!monitor.esFinJuego());
+            sc = new SoundControl("click");
+            if(!ventana.mostrarGrupoCasillas(col, row)){
+                sc = new SoundControl("mina");
+                ventana.actualizarPuntuacion();
+                ventana.refrescarPantalla();
+                ventana.printMines();
+                ventana.mostrarFinJuego(true);
+            }else{
+                ventana.actualizarPuntuacion();
+                ventana.refrescarPantalla();
+                if (ventana.getJuego().esFinJuego()) {
+                    ventana.mostrarFinJuego(false);
+                }
             }
         }
     }
