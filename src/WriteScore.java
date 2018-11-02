@@ -32,7 +32,12 @@ public class WriteScore {
      */
     public WriteScore(VentanaPrincipal ventana) {
         this.ventana = ventana;
-        this.fich = new File("Score/high_score");
+        File dir = new File("Score");
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+        this.fich = new File("Score/high_score.txt");
+
     }
 
     /**
