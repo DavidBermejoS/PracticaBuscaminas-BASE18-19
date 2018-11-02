@@ -1,5 +1,5 @@
 bin/
-out/
+out/production
 .settings
 .idea
 .classpath
