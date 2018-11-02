@@ -323,7 +323,7 @@ public class VentanaPrincipal {
         for (int i = 0; i < juego.LADO_TABLERO; i++) {
             for (int j = 0; j < juego.LADO_TABLERO; j++) {
                 if (!juego.abrirCasilla(i, j)) {
-                    Icon mine = new ImageIcon("resources/mine.png");
+                    Icon mine = new ImageIcon(Principal.class.getResource("/mine.png"));
                     botonesJuego[i][j].setText(" ");
                     botonesJuego[i][j].setIcon(mine);
                 }

@@ -1,4 +1,4 @@
-version=1.5.0
+version=v2.0.0
 
 BASE PARA EL BUSCAMINAS: (David Bermejo Simon)
 =========================
