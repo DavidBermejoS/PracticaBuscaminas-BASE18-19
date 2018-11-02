@@ -72,7 +72,7 @@ public class MouseAction implements MouseListener {
         if (SwingUtilities.isRightMouseButton(mouseEvent)) {
             SoundControl sc = new SoundControl("click");
             if (buttonAux.getText().equals("-")) {
-                Icon flag = new ImageIcon("resources/flag_orange.png");
+                Icon flag = new ImageIcon(Principal.class.getResource("/flag_orange.png"));
                 buttonAux.setIcon(flag);
                 buttonAux.setText("");
             } else {

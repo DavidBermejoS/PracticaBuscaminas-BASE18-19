@@ -35,21 +35,34 @@ public class SoundControl extends Thread {
             String OS = System.getProperty("os.name").toLowerCase();
             clip = AudioSystem.getClip();
             if (sonido.equals("click")) {
-                audioStream = AudioSystem.getAudioInputStream(new File("resources/click.wav"));
+                try(InputStream inputStream = Principal.class.getResourceAsStream("click.wav")){
+                    InputStream buffer = new BufferedInputStream(inputStream);
+                    audioStream = AudioSystem.getAudioInputStream(buffer);
+                    clip.open(audioStream);
+                    clip.start();
+                }
+               // audioStream = AudioSystem.getAudioInputStream(new File("resources/click.wav"));
             } else if (sonido.equals("mina")) {
                 //si el sistema operativo en el que se ejecuta el programa es de la familia windows
                 if (OS.indexOf("win") >= 0) {
-                    System.out.println(System.getProperty("os.name").toLowerCase());
-                    audioStream = AudioSystem.getAudioInputStream(new File("resources/Grenade.wav"));
+                    try(InputStream inputStream = Principal.class.getResourceAsStream("Grenade.wav")){
+                        InputStream buffer = new BufferedInputStream(inputStream);
+                        audioStream = AudioSystem.getAudioInputStream(buffer);
+                        clip.open(audioStream);
+                        clip.start();
+                    }
                     //si el sistema operativo en el que se ejecuta el programa es de la familia unix
                 } else if (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") >= 0 || OS.indexOf("mac") >= 0) {
-                    audioStream = AudioSystem.getAudioInputStream(new File("resources/mina.wav"));
+                    try(InputStream inputStream = Principal.class.getResourceAsStream("mina.wav")){
+                        InputStream buffer = new BufferedInputStream(inputStream);
+                        audioStream = AudioSystem.getAudioInputStream(buffer);
+                        clip.open(audioStream);
+                        clip.start();
+                    }
                 }
 
 
             }
-            clip.open(audioStream);
-            clip.start();
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         } catch (UnsupportedAudioFileException e) {
