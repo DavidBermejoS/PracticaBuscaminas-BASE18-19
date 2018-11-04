@@ -54,7 +54,7 @@ public class User implements Comparable {
         User aux = (User) o;
         int scoreThis = Integer.parseInt(this.score);
         int scoreAux = Integer.parseInt(aux.score);
-        if (scoreThis > scoreAux) {
+        if (scoreThis < scoreAux) {
             return 1;
         } else if (scoreAux == scoreThis) {
             return 0;
