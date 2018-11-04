@@ -1,9 +1,12 @@
 bin/
-out/production
+out/
 .settings
 .idea
 .classpath
 .project
 *.iml
-.metadata
+*.eml
+*.userlibraries
 .recommenders
+Score/
+.metadata
